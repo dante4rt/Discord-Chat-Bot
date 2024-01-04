@@ -1,0 +1,17 @@
+{
+  "name": "discord-chat-bot",
+  "version": "1.0.0",
+  "description": "Reserved mf.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Dante4rt",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.4",
+    "dc-api": "^1.0.3",
+    "dotenv": "^16.3.1"
+  }
+}
