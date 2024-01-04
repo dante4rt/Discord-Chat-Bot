@@ -1,2 +1,2 @@
 # Discord-Chat-Bot
-Discord Auto Chat Bot
+Reserved mf.
