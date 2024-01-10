@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Discord = require('./discord');
 const colors = require('colors');
 const fs = require('fs');
