@@ -14,7 +14,7 @@ A simple Discord bot for sending random quotes and reposting messages in a chann
 - Run the bot using `node index.js`.
 
 ## Configuration
-The bot can be configured via the `.env` file or by providing environment variables. Additionally, a backup file (backup.txt) and a history file (history.txt) are maintained for easy reference.
+The bot can be configured via the `.env` file or by providing environment variables. Additionally, a backup file (backup.txt) is maintained for easy reference.
 
 ## Dependencies
 - discord.js - Discord API library.
