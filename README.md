@@ -1,6 +1,9 @@
 # Discord-Chat-Bot
 A simple Discord bot for sending random quotes and reposting messages in a channel.
 
+## Screenshot
+![Proof](https://i.ibb.co/3YFDYVx/Screenshot-at-Jan-11-00-08-44.png)
+
 ## Features
 - Sends random quotes in the specified channel based on the chosen mode.
 - Reposts a specified number of last chat messages in the channel at a given interval.
@@ -22,6 +25,7 @@ Alternatively, you can create a bookmark and paste this JavaScript code into the
 ## Usage
 - Clone the repository.
 - Install dependencies using `npm install`.
+- Make a new file called `.env` and copy the code from `.env.example` into it.
 - Configure the bot by running the script and providing necessary information.
 - Run the bot using `node index.js`.
 
