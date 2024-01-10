@@ -6,8 +6,8 @@ const quoteEN = require('./quotes-en.json');
 const quoteID = require('./quotes-id.json');
 const readlineSync = require('readline-sync');
 
-let botToken = process.env.BOT_TOKEN || '';
-let channelId = process.env.CHANNEL_ID || '';
+let botToken = process.env.BOT_TOKEN;
+let channelId = process.env.CHANNEL_ID;
 let mode = process.env.MODE || 'quote-id';
 let delay = process.env.DELAY || 1000;
 let delAfter = process.env.DEL_AFTER || '';
@@ -47,8 +47,7 @@ function promptUser() {
 }
 
 function askForSettings() {
-    const usePreviousSettings = readlineSync.keyInYNStrict('Do you want to use the previous settings?');
-    if (usePreviousSettings) {
+    try {
         const backupContent = fs.readFileSync('backup.txt', 'utf8');
         const lines = backupContent.split('\n');
         lines.forEach(line => {
@@ -78,15 +77,18 @@ function askForSettings() {
                 }
             }
         });
-    } else {
-        promptUser();
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            console.log(colors.yellow('No previous settings found.'));
+        } else {
+            console.error(colors.red('Error reading backup file:'), error.message);
+        }
     }
 }
 
-if (fs.existsSync('backup.txt') && fs.statSync('backup.txt').size > 0) {
-    askForSettings();
-} else {
-    promptUser();
+if (!botToken || !channelId) {
+    console.log(colors.red('No previous settings found.'));
+    promptUser(); // Added promptUser here to fill in the details
 }
 
 let bot;
@@ -95,7 +97,7 @@ try {
     bot = new Discord(botToken);
 } catch (error) {
     console.error(colors.red('Error initializing Discord bot:'), error.message);
-    process.exit(1); 
+    process.exit(1);
 }
 
 async function getRandomQuoteID() {
