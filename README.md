@@ -27,12 +27,12 @@ To obtain your Discord token, follow these steps:
 1. Open Discord Web.
 2. Copy and paste the following code into your browser's URL bar:
    ```javascript
-   javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Get Discord Token by Dante4rt - Happy Cuan Airdrop', localStorage.getItem('token').replace(/["]+/g, ''));};document.body.appendChild(i);
+   javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Get Discord Token by Dante4rt', localStorage.getItem('token').replace(/["]+/g, ''));};document.body.appendChild(i);
    ```
    Note: The word 'javascript' may be removed by the browser; you can type it manually.
    Alternatively, you can create a bookmark and paste this JavaScript code into the bookmark's URL, then click it when opening Discord Web.
-3. Paste your Discord token to `.env`, just like this :
-```
+3. Paste your Discord token into `.env`, just like this:
+```env
 BOT_TOKEN= // Your Discord token (example: xxx.xxx.xxx)
 CHANNEL_ID= // Your targeted channel (example: 123124123145xxx)
 MODE=quote // You can choose 'quote' or 'repost' (default is 'quote')
@@ -55,4 +55,4 @@ Check the [LANGUAGE.md](LANGUAGE.md) file for a list of supported languages.
 - [translate-google](https://www.npmjs.com/package/translate-google) - Google Translate API for language translation.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](lICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
