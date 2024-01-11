@@ -11,7 +11,7 @@ let mode = process.env.MODE || 'quote';
 let delay = process.env.DELAY || 60000;
 let delAfter = process.env.DEL_AFTER || '';
 let repostLastChat = process.env.REPOST_LAST_CHAT || 10;
-let translateTo = process.env.TRANSLATE_TO || 'en'; 
+let translateTo = process.env.TRANSLATE_TO || 'en';
 
 const quoteEN = require('./quotes-en.json');
 
@@ -116,6 +116,17 @@ async function getRandomQuote() {
 
   return translatedText;
 }
+
+bot
+  .getUserInformation()
+  .then((userInfo) => {
+    const me = userInfo.username + '#' + userInfo.discriminator;
+    console.log(colors.green('Logged in as %s'), me);
+  })
+  .catch((error) => {
+    console.error(colors.red('Error getting user information:'), error.message);
+  });
+console.log(colors.yellow('MODE: %s'), mode);
 
 function processMessage(_, contentCallback) {
   bot.getMessagesInChannel(channelId, 1).then((messageData) => {
