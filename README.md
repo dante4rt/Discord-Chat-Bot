@@ -27,7 +27,7 @@ To obtain your Discord token, follow these steps:
 1. Open Discord Web.
 2. Copy and paste the following code into your browser's URL bar:
    ```javascript
-   javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Get Discord Token by Dante4rt', localStorage.getItem('token').replace(/["]+/g, ''));};document.body.appendChild(i);
+   javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Get Discord Token by Happy Cuan Airdrop', localStorage.getItem('token').replace(/["]+/g, ''));};document.body.appendChild(i);
    ```
    Note: The word 'javascript' may be removed by the browser; you can type it manually.
    Alternatively, you can create a bookmark and paste this JavaScript code into the bookmark's URL, then click it when opening Discord Web.
