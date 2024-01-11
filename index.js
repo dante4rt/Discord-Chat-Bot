@@ -6,7 +6,9 @@ const readlineSync = require('readline-sync');
 const translate = require('translate-google');
 
 function shouldUsePreviousSettings() {
-  const usePrevious = readlineSync.keyInYNStrict('Do you want to use the previous settings?');
+  const usePrevious = readlineSync.keyInYNStrict(
+    'Do you want to use the previous settings?'
+  );
   if (usePrevious) {
     try {
       const envContent = fs.readFileSync('.env', 'utf8');
@@ -183,7 +185,9 @@ function processMessage(_, contentCallback) {
         });
       });
     } else {
-      console.error(colors.red('Channel ID is incorrect, please re-run the app.'));
+      console.error(
+        colors.red('Channel ID is incorrect, please re-run the app.')
+      );
       process.exit(1);
     }
   });
