@@ -30,6 +30,16 @@ To obtain your Discord token, follow these steps:
    ```
    Note: The word 'javascript' may be removed by the browser; you can type it manually.
    Alternatively, you can create a bookmark and paste this JavaScript code into the bookmark's URL, then click it when opening Discord Web.
+3. Paste your Discord token to `.env`, just like this :
+```
+BOT_TOKEN= // Your Discord token (example: xxx.xxx.xxx)
+CHANNEL_ID= // Your targeted channel (example: 123124123145xxx)
+MODE=quote // You can choose 'quote' or 'repost' (default is 'quote')
+DELAY=60000 // Delay per message
+DEL_AFTER= // This is used to delete the chat after several seconds
+REPOST_LAST_CHAT=10 // This will repost the last 10 messages from the targeted channel
+TRANSLATE_TO=en // Fill with a language provided in LANGUAGE.md
+```
 
 ## Configuration
 The bot can be configured via the `.env` file or by providing environment variables.
