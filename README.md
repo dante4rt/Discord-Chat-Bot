@@ -1,5 +1,5 @@
 # Discord-Chat-Bot
-A simple Discord bot for sending random quotes and reposting messages in a channel.
+A versatile Discord bot that sends random quotes and reposts messages in a channel. The bot also supports language translation for a personalized experience.
 
 ## Screenshot
 ![Proof](https://i.ibb.co/3YFDYVx/Screenshot-at-Jan-11-00-08-44.png)
@@ -7,35 +7,41 @@ A simple Discord bot for sending random quotes and reposting messages in a chann
 ## Features
 - Sends random quotes in the specified channel based on the chosen mode.
 - Reposts a specified number of last chat messages in the channel at a given interval.
+- Supports language translation for a dynamic and personalized touch.
 - Configurable settings for bot token, channel ID, mode, delay, and more.
 - Backup and history functionalities for ease of use.
 
-## Preparation
-You need to have a Discord token, get it using this :
-```
-javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Get Discord Token by Dante4rt', localStorage.getItem('token').replace(/["]+/g, ''));};document.body.appendChild(i);
-```
-Copy and paste it into your URL bar when opening Discord Web.
+## Prerequisites
+Make sure you have [Node.JS](https://nodejs.org/) installed on your machine.
 
-Note: <br/>
-The word 'javascript' may be removed by the browser; you can type it manually.
-Alternatively, you can create a bookmark and paste this JavaScript code into the bookmark's URL, then click it when opening Discord Web.
-
+## Installation
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Create a new file called `.env` and copy the code from `.env.example` into it.
+4. Configure the bot by running the script and providing necessary information.
+5. Run the bot using `node index.js`.
 
 ## Usage
-- Clone the repository.
-- Install dependencies using `npm install`.
-- Make a new file called `.env` and copy the code from `.env.example` into it.
-- Configure the bot by running the script and providing necessary information.
-- Run the bot using `node index.js`.
+To obtain your Discord token, follow these steps:
+1. Open Discord Web.
+2. Copy and paste the following code into your browser's URL bar:
+   ```javascript
+   javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Get Discord Token by Dante4rt - Happy Cuan Airdrop', localStorage.getItem('token').replace(/["]+/g, ''));};document.body.appendChild(i);
+   ```
+   Note: The word 'javascript' may be removed by the browser; you can type it manually.
+   Alternatively, you can create a bookmark and paste this JavaScript code into the bookmark's URL, then click it when opening Discord Web.
 
 ## Configuration
-The bot can be configured via the `.env` file or by providing environment variables. Additionally, a backup file (backup.txt) is maintained for easy reference.
+The bot can be configured via the `.env` file or by providing environment variables.
+
+### Supported Languages
+Check the [LANGUAGE.md](LANGUAGE.md) file for a list of supported languages.
 
 ## Dependencies
-- discord.js - Discord API library.
-- colors - Adds colors to console.log.
-- readline-sync - Synchronous Readline for interacting with the user.
+- [discord.js](https://discord.js.org/) - Discord API library.
+- [colors](https://www.npmjs.com/package/colors) - Adds colors to console.log.
+- [readline-sync](https://www.npmjs.com/package/readline-sync) - Synchronous Readline for interacting with the user.
+- [translate-google](https://www.npmjs.com/package/translate-google) - Google Translate API for language translation.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](lICENSE) file for details.
