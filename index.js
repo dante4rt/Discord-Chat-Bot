@@ -5,6 +5,28 @@ const fs = require('fs');
 const readlineSync = require('readline-sync');
 const translate = require('translate-google');
 
+function shouldUsePreviousSettings() {
+  const usePrevious = readlineSync.keyInYNStrict('Do you want to use the previous settings?');
+  if (usePrevious) {
+    try {
+      const envContent = fs.readFileSync('.env', 'utf8');
+      const envLines = envContent.split('\n');
+      envLines.forEach((line) => {
+        const [key, value] = line.split('=').map((entry) => entry.trim());
+        if (key && value) {
+          process.env[key] = value;
+        }
+      });
+      return true;
+    } catch (error) {
+      console.error('Error reading .env file:', error.message);
+    }
+  }
+  return false;
+}
+
+const usePreviousSettings = shouldUsePreviousSettings();
+
 let botToken = process.env.BOT_TOKEN;
 let channelId = process.env.CHANNEL_ID;
 let mode = process.env.MODE || 'quote';
@@ -15,7 +37,7 @@ let translateTo = process.env.TRANSLATE_TO || 'en';
 
 const quoteEN = require('./quotes-en.json');
 
-function promptUser() {
+if (!usePreviousSettings) {
   botToken = readlineSync.question('Enter your Discord bot token: ', {
     defaultInput: botToken,
   });
@@ -86,11 +108,6 @@ function promptUser() {
   fs.writeFileSync('.env', envData);
 }
 
-if (!botToken || !channelId) {
-  console.log(colors.red('No previous settings found.'));
-  promptUser();
-}
-
 let bot;
 
 try {
@@ -130,40 +147,45 @@ console.log(colors.yellow('MODE: %s'), mode);
 
 function processMessage(_, contentCallback) {
   bot.getMessagesInChannel(channelId, 1).then((messageData) => {
-    contentCallback(messageData.reverse()[0].content).then((response) => {
-      bot.sendMessageToChannel(channelId, response).then((sentMessage) => {
-        const sentMessageContent = sentMessage.content;
-        console.log(
-          colors.green('[SEND][%s] %s'),
-          sentMessage.id,
-          sentMessageContent
-        );
+    if (messageData && messageData.length > 0) {
+      contentCallback(messageData.reverse()[0].content).then((response) => {
+        bot.sendMessageToChannel(channelId, response).then((sentMessage) => {
+          const sentMessageContent = sentMessage.content;
+          console.log(
+            colors.green('[SEND][%s] %s'),
+            sentMessage.id,
+            sentMessageContent
+          );
 
-        if (delAfter) {
-          setTimeout(() => {
-            bot
-              .deleteMessageInChannel(channelId, sentMessage.id)
-              .then((deletedMessage) => {
-                if (deletedMessage) {
-                  console.log(
-                    colors.red('[DELETE][%s] %s'),
-                    deletedMessage.id,
-                    sentMessageContent
-                  );
-                } else {
-                  console.log(
-                    colors.red('[DELETE][%s] Deleted successfully'),
-                    sentMessage.id
-                  );
-                }
-              })
-              .catch((error) => {
-                console.error(colors.red('[DELETE] Error:'), error.message);
-              });
-          }, delAfter);
-        }
+          if (delAfter) {
+            setTimeout(() => {
+              bot
+                .deleteMessageInChannel(channelId, sentMessage.id)
+                .then((deletedMessage) => {
+                  if (deletedMessage) {
+                    console.log(
+                      colors.red('[DELETE][%s] %s'),
+                      deletedMessage.id,
+                      sentMessageContent
+                    );
+                  } else {
+                    console.log(
+                      colors.red('[DELETE][%s] Deleted successfully'),
+                      sentMessage.id
+                    );
+                  }
+                })
+                .catch((error) => {
+                  console.error(colors.red('[DELETE] Error:'), error.message);
+                });
+            }, delAfter);
+          }
+        });
       });
-    });
+    } else {
+      console.error(colors.red('Channel ID is incorrect, please re-run the app.'));
+      process.exit(1);
+    }
   });
 }
 
