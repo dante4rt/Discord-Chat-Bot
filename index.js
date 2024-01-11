@@ -6,24 +6,30 @@ const readlineSync = require('readline-sync');
 const translate = require('translate-google');
 
 function shouldUsePreviousSettings() {
-  const usePrevious = readlineSync.keyInYNStrict(
-    'Do you want to use the previous settings?'
-  );
-  if (usePrevious) {
-    try {
-      const envContent = fs.readFileSync('.env', 'utf8');
-      const envLines = envContent.split('\n');
-      envLines.forEach((line) => {
-        const [key, value] = line.split('=').map((entry) => entry.trim());
-        if (key && value) {
-          process.env[key] = value;
-        }
-      });
-      return true;
-    } catch (error) {
-      console.error('Error reading .env file:', error.message);
+  const envFileExists = fs.existsSync('.env');
+
+  if (envFileExists) {
+    const usePrevious = readlineSync.keyInYNStrict(
+      'Do you want to use the previous settings?'
+    );
+
+    if (usePrevious) {
+      try {
+        const envContent = fs.readFileSync('.env', 'utf8');
+        const envLines = envContent.split('\n');
+        envLines.forEach((line) => {
+          const [key, value] = line.split('=').map((entry) => entry.trim());
+          if (key && value) {
+            process.env[key] = value;
+          }
+        });
+        return true;
+      } catch (error) {
+        console.error('Error reading .env file:', error.message);
+      }
     }
   }
+
   return false;
 }
 
@@ -149,8 +155,16 @@ console.log(colors.yellow('MODE: %s'), mode);
 
 function processMessage(_, contentCallback) {
   bot.getMessagesInChannel(channelId, 1).then((messageData) => {
-    if (messageData && messageData.length > 0) {
-      contentCallback(messageData.reverse()[0].content).then((response) => {
+    const hasMessages = messageData && messageData.length > 0;
+
+    if (!hasMessages) {
+      console.warn(
+        colors.yellow('No messages in the channel. Sending a message anyway.')
+      );
+    }
+
+    contentCallback(hasMessages ? messageData.reverse()[0].content : '').then(
+      (response) => {
         bot.sendMessageToChannel(channelId, response).then((sentMessage) => {
           const sentMessageContent = sentMessage.content;
           console.log(
@@ -183,13 +197,8 @@ function processMessage(_, contentCallback) {
             }, delAfter);
           }
         });
-      });
-    } else {
-      console.error(
-        colors.red('Channel ID is incorrect, please re-run the app.')
-      );
-      process.exit(1);
-    }
+      }
+    );
   });
 }
 
