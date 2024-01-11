@@ -20,6 +20,7 @@ Make sure you have [Node.JS](https://nodejs.org/) installed on your machine.
 3. Create a new file called `.env` and copy the code from `.env.example` into it.
 4. Configure the bot by running the script and providing necessary information.
 5. Run the bot using `node index.js`.
+6. If an error occurs, you can delete the `.env` file and attempt the process again.
 
 ## Usage
 To obtain your Discord token, follow these steps:
