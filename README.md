@@ -17,10 +17,8 @@ Make sure you have [Node.JS](https://nodejs.org/) installed on your machine.
 ## Installation
 1. Clone the repository.
 2. Install dependencies using `npm install`.
-3. Create a new file called `.env` and copy the code from `.env.example` into it.
-4. Configure the bot by running the script and providing necessary information.
-5. Run the bot using `node index.js`.
-6. If an error occurs, you can delete the `.env` file and attempt the process again.
+3. Run the bot using `node index.js`.
+4. If an error occurs, you can delete the `.env` file and attempt the process again.
 
 ## Usage
 To obtain your Discord token, follow these steps:
@@ -31,7 +29,7 @@ To obtain your Discord token, follow these steps:
    ```
    Note: The word 'javascript' may be removed by the browser; you can type it manually.
    Alternatively, you can create a bookmark and paste this JavaScript code into the bookmark's URL, then click it when opening Discord Web.
-3. Paste your Discord token into `.env`, just like this:
+3. Run the script again using `node index.js` or paste your Discord token into `.env`, just like this:
 ```env
 BOT_TOKEN= // Your Discord token (example: xxx.xxx.xxx)
 CHANNEL_ID= // Your targeted channel (example: 123124123145xxx)
