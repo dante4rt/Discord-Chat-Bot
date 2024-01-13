@@ -1,5 +1,5 @@
 require('dotenv').config();
-const Discord = require('./discord');
+const Discord = require('discord-simple-api');
 const colors = require('colors');
 const fs = require('fs');
 const readlineSync = require('readline-sync');
